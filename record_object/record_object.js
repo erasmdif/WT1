@@ -1,4 +1,4 @@
-import { getPath } from "../path_utils";
+import { getPath } from "../path_utils.js";
 
 /**
  * record_object.js — versione multi-CSV con "Components characteristics" filtrabili
