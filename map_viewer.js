@@ -415,22 +415,46 @@ import { getPath } from './path_utils.js';
     fitToTombe(tombeLayer);
   }
 
-// Fit iniziale
-fitInitialView();
+// Fit Iniziale ---
 
-// Zoom "dolce": +2 ma senza superare una soglia
-const INITIAL_ZOOM_DELTA   = 2;
-const INITIAL_ZOOM_CEILING = 19; // scegli 18/19/20 a gusto
+function doInitialFit() {
+  // invalida le dimensioni (se il CSS è arrivato dopo)
+  map.invalidateSize(true);
 
-const z = map.getZoom();
-const next = Math.min(z + INITIAL_ZOOM_DELTA, INITIAL_ZOOM_CEILING);
+  // fit sugli strati disponibili
+  fitInitialView();
 
-if (next > z) {
-  map.setZoom(next, { animate: false });
+  // Zoom "dolce": +2 ma senza superare una soglia
+  const INITIAL_ZOOM_DELTA   = 2;
+  const INITIAL_ZOOM_CEILING = 19; // 18/19/20 a gusto
+
+  const z = map.getZoom();
+  const next = Math.min(z + INITIAL_ZOOM_DELTA, INITIAL_ZOOM_CEILING);
+  if (next > z) map.setZoom(next, { animate: false });
+
+  // aggiorna eventuali etichette/overlay dipendenti dallo zoom
+  updateLabelVisibility();
 }
 
-// Poi aggiorna etichette
-updateLabelVisibility();
+function scheduleSafeInitialFit() {
+  // appena Leaflet segnala "ready"
+  map.whenReady(() => {
+    // subito dopo il frame corrente
+    requestAnimationFrame(() => doInitialFit());
+    // piccoli retry per font/CSS lenti (GitHub Pages)
+    setTimeout(() => map.invalidateSize(true), 150);
+    setTimeout(() => doInitialFit(), 300);
+    setTimeout(() => map.invalidateSize(true), 700);
+  });
+
+  // anche al 'load' della pagina (quando TUTTO è caricato)
+  window.addEventListener('load', () => doInitialFit());
+  // e ad ogni resize
+  window.addEventListener('resize', () => map.invalidateSize(true));
+}
+
+// Avvia la sequenza di fit robusto
+scheduleSafeInitialFit();
 
   /* =========================
      FILTRO CATEGORIE + PRECISION
