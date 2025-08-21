@@ -1,4 +1,4 @@
-import { getPath } from '../../path_utils.js';
+import { getPath } from './path_utils.js';
 
 /* === Carica CSS del popup === */
 (function loadPopupTombeCSS() {

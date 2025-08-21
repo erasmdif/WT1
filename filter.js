@@ -1,4 +1,4 @@
-import { getPath } from '../../path_utils.js';
+import { getPath } from './path_utils.js';
 
 export async function initCategoryFilter(oggettiFeatures, updateVisibleObjects) {
   const normalize = (s) => (s ?? "").trim().toLowerCase();

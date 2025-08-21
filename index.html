@@ -3,97 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <title>Pianta del sito</title>
-  <link rel="stylesheet" href="../css/record_necropoli.css" />
-  <link rel="stylesheet" href="../css/popup_object.css" />
+
+  <!-- CSS locali caricati in modo robusto via getPath (impostati da script in <body>) -->
+  <link id="rec-css" rel="stylesheet" />
+  <link id="obj-css" rel="stylesheet" />
+
+  <!-- CSS/JS di terze parti -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://unpkg.com/georaster"></script>
   <script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
   <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
+  <!-- Inizializzazione path + CSS + logo/link -->
+  <script type="module">
+    import { getPath } from './path_utils.js';
+
+    // CSS locali
+    const recCss = document.getElementById('rec-css');
+    const objCss = document.getElementById('obj-css');
+
+    recCss.href = getPath('css/record_necropoli.css');
+
+    // popup_object.css è opzionale: prova a caricarlo, rimuovi se 404
+    (async () => {
+      const url = getPath('css/popup_object.css');
+      try {
+        const res = await fetch(url, { method: 'HEAD' });
+        if (res.ok) objCss.href = url;
+        else objCss.remove();
+      } catch {
+        objCss.remove();
+      }
+    })();
+
+    // Link pagina info + logo dashboard
+    const logoLink = document.getElementById('logo-link');
+    const logoImg  = document.getElementById('dashboard-logo');
+    if (logoLink) logoLink.href = getPath('info/info.html');
+    if (logoImg)  logoImg.src  = getPath('images/logo_erasmo.svg');
+  </script>
+
   <div id="dashboard">
     <a id="logo-link" href="#">
-      <img id="dashboard-logo" />
+      <img id="dashboard-logo" alt="Project logo"/>
     </a>
-  
-    <script type="module">
-      import { getPath } from '../../path_utils.js';
-      // Logo → pagina info
-      document.getElementById('logo-link').href = getPath("info/info.html");
-      document.getElementById('dashboard-logo').src = getPath("images/logo_erasmo.svg");
-    </script>
-  
-  <div class="dashboard-section" id="visualization-controls">
-    <h3>Layer's on map</h3>
-  
-    <div class="control-item">
-      <label class="switch">
-        <input type="checkbox" id="toggle-raster" checked>
-        <span class="slider round"></span>
-      </label>
-      <span>Site's map</span>
-    </div>
-  
-    <div class="control-item">
-      <label class="switch">
-        <input type="checkbox" id="toggle-oggetti" checked>
-        <span class="slider round"></span>
-      </label>
-      <span>Objects</span>
-    </div>
-  
-    <div class="control-item">
-      <label class="switch">
-        <input type="checkbox" id="toggle-grid">
-        <span class="slider round"></span>
-      </label>
-      <span>Grid</span>
-    </div>
-  
-    <div class="control-item">
-      <label class="switch">
-        <input type="checkbox" id="toggle-iso">
-        <span class="slider round"></span>
-      </label>
-      <span>Iso (elevations)</span>
-    </div>
-  
-    <!-- Precision range (compatto) -->
-    <div class="precision-compact">
-      <div class="precision-header">
-        <span class="precision-title">Data quality (precision)</span>
-    
-        <!-- help icona + tooltip accessibile -->
-        <button class="dq-help" aria-describedby="dq-tip" aria-label="Cosa significano i numeri?">?</button>
-        <div class="dq-tooltip" id="dq-tip" role="tooltip">
-          <strong>0</strong> certain location<br>
-          <strong>1</strong> located inside defined tomb, feature or stratum<br>
-          <strong>2</strong> detailed written information about original location<br>
-          <strong>3</strong> general written information about original location<br>
-          <strong>4</strong> no information about original location
+
+    <div class="dashboard-section" id="visualization-controls">
+      <h3>Layer's on map</h3>
+
+      <div class="control-item">
+        <label class="switch">
+          <input type="checkbox" id="toggle-raster" checked>
+          <span class="slider round"></span>
+        </label>
+        <span>Site's map</span>
+      </div>
+
+      <div class="control-item">
+        <label class="switch">
+          <input type="checkbox" id="toggle-oggetti" checked>
+          <span class="slider round"></span>
+        </label>
+        <span>Objects</span>
+      </div>
+
+      <div class="control-item">
+        <label class="switch">
+          <input type="checkbox" id="toggle-grid">
+          <span class="slider round"></span>
+        </label>
+        <span>Grid</span>
+      </div>
+
+      <div class="control-item">
+        <label class="switch">
+          <input type="checkbox" id="toggle-iso">
+          <span class="slider round"></span>
+        </label>
+        <span>Iso (elevations)</span>
+      </div>
+
+      <!-- Precision range (compatto) -->
+      <div class="precision-compact">
+        <div class="precision-header">
+          <span class="precision-title">Data quality (precision)</span>
+
+          <!-- help icona + tooltip accessibile -->
+          <button class="dq-help" aria-describedby="dq-tip" aria-label="Cosa significano i numeri?">?</button>
+          <div class="dq-tooltip" id="dq-tip" role="tooltip">
+            <strong>0</strong> certain location<br>
+            <strong>1</strong> located inside defined tomb, feature or stratum<br>
+            <strong>2</strong> detailed written information about original location<br>
+            <strong>3</strong> general written information about original location<br>
+            <strong>4</strong> no information about original location
+          </div>
+
+          <span class="precision-range-chip" id="precision-range-label">0–4</span>
         </div>
-    
-        <span class="precision-range-chip" id="precision-range-label">0–4</span>
-      </div>
-    
-      <div class="precision-range" id="precision-range">
-        <div class="range-track"></div>
-        <div class="range-fill" id="precision-range-fill"></div>
-    
-        <span class="thumb-bubble bubble-min" id="prec-bubble-min">0</span>
-        <span class="thumb-bubble bubble-max" id="prec-bubble-max">4</span>
-    
-        <input type="range" id="precision-min" min="0" max="4" step="1" value="0" aria-label="min precision">
-        <input type="range" id="precision-max" min="0" max="4" step="1" value="4" aria-label="max precision">
+
+        <div class="precision-range" id="precision-range">
+          <div class="range-track"></div>
+          <div class="range-fill" id="precision-range-fill"></div>
+
+          <span class="thumb-bubble bubble-min" id="prec-bubble-min">0</span>
+          <span class="thumb-bubble bubble-max" id="prec-bubble-max">4</span>
+
+          <input type="range" id="precision-min" min="0" max="4" step="1" value="0" aria-label="min precision">
+          <input type="range" id="precision-max" min="0" max="4" step="1" value="4" aria-label="max precision">
+        </div>
       </div>
     </div>
-  </div>  
-  
+
     <div class="dashboard-section" id="site-chart-section" x-data="{ open: false, rendered: false }">
       <h3 @click="open = !open; if (!rendered) { window.renderSiteGraphLazy(); rendered = true; }" style="cursor: pointer;">
         Context's types:
@@ -103,12 +130,12 @@
         <canvas id="siteChartCanvas" width="300" height="300"></canvas>
       </div>
     </div>
-  </div>  
+  </div>
 
   <div id="map"></div>
 
   <!-- Script principali -->
-  <script type="module" src="map_viewer.js"></script>
+  <script type="module" src="./map_viewer.js"></script>
   <script type="module">
     import { Tutorial } from './tutorial_necropoli.js';
     window.addEventListener('DOMContentLoaded', () => {

@@ -1,4 +1,4 @@
-import { getPath } from '../../path_utils.js';
+import { getPath } from './path_utils.js';
 
 export function addObjectsLayer(map, objectFeatures) {
   const size = 32;

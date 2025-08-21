@@ -1,5 +1,5 @@
 // tutorial_necropoli.js
-import { getPath } from '../../path_utils.js';
+import { getPath } from './path_utils.js';
 
 export class Tutorial {
   constructor() {
@@ -20,7 +20,6 @@ export class Tutorial {
         `,
         target: null,                           // nessun highlight
         boxPos: { side: 'center' },             // box al centro
-        media: { type: 'image', src: getPath("images/tutorial/step0.png") },
       },
 
       // 1 — Oggetti (niente highlight mappa, facciamo pulsare i marker; box a destra sopra la dashboard)

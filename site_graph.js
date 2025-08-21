@@ -1,4 +1,4 @@
-import { getPath } from '../../path_utils.js';
+import { getPath } from './path_utils.js';
 
 export function renderSiteGraph(tombeDelSito) {
     const tipologie = {};

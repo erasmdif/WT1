@@ -2,7 +2,7 @@ import { addObjectsLayer } from './objects_layer.js';
 import { initCategoryFilter } from './filter.js';
 import { renderSiteGraph } from './site_graph.js';
 import { createTombaPopup } from './popup_tombe.js';
-import { getPath } from '../../path_utils.js';
+import { getPath } from './path_utils.js';
 
 (async () => {
   const mapEl         = document.getElementById('map');
