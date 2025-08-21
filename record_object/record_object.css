@@ -1,0 +1,233 @@
+:root{
+  --primary:#1a73e8;
+  --primary-weak:#e8f0fe;
+  --text:#202124;
+  --muted:#5f6368;
+  --border:#e0e0e0;
+  --bg:#f8f9fa;
+  --card-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.55;
+}
+
+.record-container{
+  max-width:1200px;
+  margin:32px auto;
+  padding:0 20px;
+}
+
+.info-box{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:var(--card-shadow);
+  padding:24px;
+}
+
+h1{
+  margin:0 0 6px 0;
+  color:var(--primary);
+  font-size:28px;
+  letter-spacing:.2px;
+}
+h2{
+  margin:0 0 18px 0;
+  color:var(--muted);
+  font-weight:500;
+  font-size:16px;
+}
+
+.fields-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(220px,1fr));
+  gap:12px 18px;
+}
+@media (max-width:720px){
+  .fields-grid{grid-template-columns:1fr}
+}
+
+/* singolo campo */
+.field{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px 12px;
+}
+.label{
+  display:block;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  color:#3367d6;
+  font-weight:700;
+  margin-bottom:4px;
+}
+.value{
+  font-size:15px;
+  color:#2b2b2b;
+}
+
+.section-sep{
+  border:none;
+  border-top:1px solid var(--border);
+  margin:22px 0;
+}
+
+.items-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+}
+.items-header h3{
+  margin:0;
+  font-size:20px;
+}
+.items-meta{
+  display:flex;
+  gap:8px;
+  color:var(--muted);
+  font-size:13px;
+}
+.pill{
+  background:var(--primary-weak);
+  color:var(--primary);
+  padding:2px 8px;
+  border-radius:999px;
+  font-weight:600;
+}
+
+/* griglia di schede degli elementi */
+.item-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:14px;
+}
+.item-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.item-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 18px rgba(0,0,0,.08);
+}
+
+.item-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:8px;
+}
+.item-title .id{
+  font-weight:700;
+  font-size:14px;
+  color:#111;
+}
+.item-title .mini{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.item-fields{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px 12px;
+}
+.item-field{
+  border:1px dashed #ddd;
+  border-radius:8px;
+  padding:8px;
+}
+.item-field .k{
+  display:block;
+  font-size:11px;
+  color:#4a6fa5;
+  text-transform:uppercase;
+  letter-spacing:.45px;
+  margin-bottom:3px;
+}
+.item-field .v{
+  font-size:14px;
+  color:#333;
+  word-break:break-word;
+}
+
+/* campi lunghi: occupano due colonne */
+.item-field.span-2{grid-column:1 / -1}
+
+.empty-hint{
+  margin-top:10px;
+  padding:12px;
+  border:1px dashed var(--border);
+  border-radius:8px;
+  color:var(--muted);
+  background:#fff;
+}
+
+/* ===== Components characteristics (chips) ===== */
+
+.components { margin: 18px 0 6px 0; }
+.components .char-header{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-bottom:10px;
+}
+.components .char-header h3{ margin:0; font-size:18px; }
+.components .char-row{ display:flex; flex-direction:column; gap:12px; }
+
+.char-group{ display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap; }
+.char-label{
+  font-size:12px; letter-spacing:.4px; text-transform:uppercase; font-weight:700;
+  color:#3367d6; padding-top:6px; min-width:90px;
+}
+.chips{ display:flex; gap:8px; flex-wrap:wrap; }
+
+.chip{
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:13px;
+  color:var(--text);
+  cursor:pointer;
+  transition:all .15s ease;
+}
+.chip .count{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:0 6px;
+  font-size:12px;
+  margin-left:6px;
+  color:var(--muted);
+}
+.chip:hover{ transform:translateY(-1px); box-shadow:0 2px 8px rgba(0,0,0,.06); }
+
+/* Stato attivo ben visibile */
+.chip.active{
+  background:var(--primary-weak);
+  border-color:var(--primary);
+  color:var(--primary);
+}
+
+/* Bottone reset in stile “fantasma” */
+.chip.ghost{
+  background:transparent;
+  border:1px dashed var(--border);
+  color:var(--muted);
+}
+.chip.ghost:hover{
+  border-color:var(--primary);
+  color:var(--primary);
+}

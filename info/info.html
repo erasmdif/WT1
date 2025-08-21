@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WT1 excavation project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="./info.css" />
+  <script type="module" src="./info.js"></script>
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-content">
+      <a id="home-link" href="#">
+        <img id="project-logo" alt="WT1 Project icon" />
+        <span class="return-link">return to the map</span>
+      </a>
+      <div class="header-text">
+        <h1>WT1 excavation project</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="content-container">
+    <!-- SECTION 1 — The Project -->
+    <section class="intro-section">
+      <h2>The project</h2>
+      <div class="intro-grid">
+        <div class="intro-card">
+          <h3>WT1 - hisotry and excavation</h3>
+          <p><em>To be updated.</em></p>
+      </div>
+    </section>
+
+    <!-- SECTION 2 — Licensing -->
+    <section class="licensing-section">
+      <h2>Licensing Overview</h2>
+      <div class="table-container">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Source</th>
+              <th>License</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Code &amp; Data Model</td>
+              <td>Developed by the author</td>
+              <td><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></td>
+            </tr>
+            <tr>
+              <td>Icons</td>
+              <td>Developed by the author &amp; AI-generated</td>
+              <td><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></td>
+            </tr>
+            <!-- REMOVED: Site Data row -->
+            <tr>
+              <td>Archaeological Database (Data Only)</td>
+              <td>Produced by the team using field data</td>
+              <td><a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 3 — Team -->
+    <section class="team-section" id="team">
+      <h2>Team</h2>
+
+      <!-- Field & Research Team -->
+      <div class="team-block variant-a">
+        <div class="team-block-header">
+          <h3>Field and Research Team</h3>
+        </div>
+        <div class="team-grid">
+          <!-- Gatto -->
+          <article class="team-card">
+            <img class="team-photo" data-src="images/person/Gatto.png" alt="Maria Carmela Gatto" />
+            <div class="team-info">
+              <h4>Maria Carmela Gatto</h4>
+              <p class="role">Director of the project</p>
+              <p class="bio">Assistant Professor at Institute of Mediterranean and Oriental Cultures, Polish Academy of Sciences</p>
+            </div>
+          </article>
+
+          <!-- Nicolini -->
+          <article class="team-card">
+            <img class="team-photo" data-src="images/person/Nicolini.png" alt="Serena Nicolini" />
+            <div class="team-info">
+              <h4>Serena Nicolini</h4>
+              <p class="role">Researcher</p>
+              <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae cursus velit.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- LAD Members -->
+      <div class="team-block variant-b">
+        <div class="team-block-header">
+          <h3>LAD Members</h3>
+        </div>
+        <div class="team-grid reverse">
+          <!-- Bogdani -->
+          <article class="team-card">
+            <img class="team-photo" data-src="images/person/Bogdani.png" alt="Julian Bogdani" />
+            <div class="team-info">
+              <h4>Julian Bogdani</h4>
+              <p class="role">Coordinator for the digital component; photogrammetry lead</p>
+              <p class="bio">
+                Associate Professor in Methods of Archaeological Research (L-ANT/10) at Sapienza University of Rome
+                and Director of LAD (Laboratorio di Archeologia Digitale).
+              </p>
+            </div>
+          </article>
+
+          <!-- Erasmo -->
+          <article class="team-card">
+            <img class="team-photo" data-src="images/person/Erasmo.png" alt="Erasmo di Fonso" />
+            <div class="team-info">
+              <h4>Erasmo di Fonso</h4>
+              <p class="role">GIS, database and site manager</p>
+              <p class="bio">Responsible for geospatial workflows, database development and on-site integration.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 — Bibliography & Sitography -->
+    <section class="biblio-section">
+      <h2>Bibliography &amp; Sitography</h2>
+      <div class="intro-card">
+        <p><em>To be updated.</em></p>
+      </div>
+    </section>
+
+    <!-- SECTION 5 — Future Prospects (trimmed as requested) -->
+    <section class="future-section">
+      <h2>Future Prospects</h2>
+      <div class="future-grid">
+        <div class="future-card">
+          <p>The current prototype is designed as a scalable foundation for future extensions. Development plans include:</p>
+          <ul class="feature-list">
+            <li><strong>Additional archaeological contexts</strong>, expanding the dataset beyond the current tombs.</li>
+            <li><strong>Analysis tools</strong> for exploration and comparison (map- and data-driven).</li>
+            <li><strong>Incorporation of new data types</strong>, including human remains, archaeozoological findings, and botanical evidence.</li>
+            <li><strong>Introduction of spatial analysis tools</strong>, enabling map-based visualizations and geographic queries.</li>
+            <!-- Removed: Hierarchical modeling of sub-contexts -->
+            <!-- Removed: Refinement and expansion of the affinity algorithm -->
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="footer-content">
+      <p>© 2025 WT1 Project |</p>
+      <div class="footer-logos">
+        <a href="https://github.com/erasmdif/" target="_blank" rel="noopener">
+          <img id="footer-logo-erasmo" alt="Erasmo GitHub" />
+        </a>
+        <a href="https://lad.saras.uniroma1.it/" target="_blank" rel="noopener">
+          <img id="footer-logo-lad" alt="LAD — Laboratorio di Archeologia Digitale" />
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

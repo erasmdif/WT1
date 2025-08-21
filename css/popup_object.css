@@ -1,0 +1,174 @@
+/* =========================================================
+   OBJECT POPUP & ICON — 2 columns, clean, precision-aware
+   Scope: popup root class `leaflet-popup-object`
+          icon root class   `object-icon precision-*`
+   ========================================================= */
+
+/* ---------- Precision palette via CSS variables ---------- */
+.leaflet-popup-object,
+.object-icon { --accent: #9e9e9e; } /* default/unknown */
+
+.leaflet-popup-object.precision-0,
+.object-icon.precision-0 { --accent: #1e88e5; } /* azzurro */
+.leaflet-popup-object.precision-1,
+.object-icon.precision-1 { --accent: #43a047; } /* verde */
+.leaflet-popup-object.precision-2,
+.object-icon.precision-2 { --accent: #fdd835; } /* giallo */
+.leaflet-popup-object.precision-3,
+.object-icon.precision-3 { --accent: #fb8c00; } /* arancione */
+.leaflet-popup-object.precision-4,
+.object-icon.precision-4 { --accent: #e53935; } /* rosso */
+.leaflet-popup-object.precision-unknown,
+.object-icon.precision-unknown { --accent: #9e9e9e; } /* grigio */
+
+/* ---------------- Leaflet popup container ---------------- */
+.leaflet-popup-object .leaflet-popup-content-wrapper {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-left: 6px solid var(--accent);
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+  padding: 0;                     /* padding gestito internamente */
+  min-width: 340px;
+  max-width: 640px;
+}
+
+.leaflet-popup-object .leaflet-popup-tip {
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.leaflet-popup-object .leaflet-popup-content {
+  margin: 0;
+  padding: 0;
+}
+
+/* -------------------- Content layout -------------------- */
+.leaflet-popup-object .popup-wrapper {
+  display: block;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #2b2b2b;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.leaflet-popup-object .popup-info-container {
+  /* griglia 2 colonne su viewport larghe, 1 col su schermi piccoli */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;                /* row-gap, column-gap */
+  padding: 18px 20px;
+  max-height: 60vh;              /* evita popup infiniti */
+  overflow: auto;
+}
+
+/* una colonna su schermi stretti */
+@media (max-width: 520px) {
+  .leaflet-popup-object .popup-info-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card/row */
+.leaflet-popup-object .popup-info-item {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-width: 0;                  /* evita overflow */
+}
+
+/* far “span-2” a descrizioni lunghe */
+.leaflet-popup-object .popup-info-item.span-2 {
+  grid-column: 1 / -1;
+}
+
+/* Label + valori */
+.leaflet-popup-object .popup-info-label {
+  font-size: 11.5px;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 6px 0;
+}
+
+.leaflet-popup-object .popup-info-main-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+  line-height: 1.3;
+}
+
+.leaflet-popup-object .popup-info-value {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.45;
+}
+
+/* Link area (se usata) */
+.leaflet-popup-object .popup-link {
+  grid-column: 1 / -1;
+  border-top: 1px solid #eee;
+  padding: 12px 20px;
+  font-size: 14px;
+}
+.leaflet-popup-object .popup-link a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.leaflet-popup-object .popup-link a:hover {
+  text-decoration: underline;
+}
+
+/* Close button rifinito */
+.leaflet-popup-object .leaflet-popup-close-button {
+  color: #666;
+  font-size: 18px;
+  right: 10px;
+  top: 8px;
+}
+.leaflet-popup-object .leaflet-popup-close-button:hover {
+  color: #111;
+}
+
+/* --------------- Marker icon (divIcon) ring --------------- */
+.object-icon {
+  position: relative;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.25));
+}
+
+.object-icon .object-ring {
+  position: relative;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.85), 0 0 6px rgba(0,0,0,0.18);
+}
+
+/* Badge con N (se > 1) — già iniettato via HTML */
+.object-icon span {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: #111;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,.25);
+}
+
+/* Hard-kill eventuali classi immagine legacy */
+.leaflet-popup-object .popup-image-info,
+.leaflet-popup-object .popup-image-container,
+.leaflet-popup-object .popup-image,
+.leaflet-popup-object .popup-image-description {
+  display: none !important;
+}

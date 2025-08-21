@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Object detail</title>
+  <link rel="stylesheet" href="./record_object.css" />
+</head>
+<body>
+  <div class="record-container">
+    <div class="info-box">
+      <h1 id="sigla">Loading…</h1>
+      <h2 id="original_description"></h2>
+
+      <div id="fields" class="fields-grid"></div>
+      <div id="components" class="components"></div>
+      <hr class="section-sep" />
+
+      <div class="items-header">
+        <h3>Items</h3>
+        <div class="items-meta">
+          <span id="items-source"></span>
+          <span id="items-count" class="pill"></span>
+        </div>
+      </div>
+
+      <div id="items-grid" class="item-cards"></div>
+
+      <div id="no-items" class="empty-hint" style="display:none;">
+        No detailed rows found for this tag in the selected CSV.
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./record_object.js"></script>
+</body>
+</html>
